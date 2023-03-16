@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.Authentication;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import simplelogin.listener.LogoutListener;
 import simplelogin.service.LogoutService;
@@ -43,6 +44,10 @@ public final class LogoutListenerTest {
     private HttpServletResponse response;
 
     @Test
+    @Sql(scripts = {
+        "classpath:sql/tables.sql",
+        "classpath:sql/clean.sql",
+    })
     public void shouldAddNewUserLogoutMessageAndRedirect() throws IOException {
         final Authentication authentication = createFakeAuthentication("admin");
 

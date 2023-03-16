@@ -10,6 +10,8 @@
 // Dev environment.
 // Dev Database configuration.
 // Set session timeout. (Done)
+// Maven jar build. (Done - mvn spring-boot:repackage)
+// Build offical database scheme.
 
 // (Rename Project) TODO
 // Rename 'Index.html' to 'home.html'.

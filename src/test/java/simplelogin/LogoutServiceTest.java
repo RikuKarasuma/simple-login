@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import simplelogin.entity.Logout;
 import simplelogin.repository.LogoutRepository;
@@ -30,6 +31,10 @@ public class LogoutServiceTest {
     private LogoutRepository logoutRepository;
 
     @Test
+    @Sql(scripts = {
+        "classpath:sql/tables.sql",
+        "classpath:sql/clean.sql",
+    })
     public void shouldAddUserLogoutToDatabase() {
 
         final var userId = 1L;

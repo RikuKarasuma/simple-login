@@ -3,14 +3,19 @@
 **********************************/
 package simplelogin;
 
-
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashMap;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static simplelogin.RequestUtils.*;
 import static simplelogin.TestUtils.createFakeServletRequest;
+
+@ExtendWith(MockitoExtension.class)
 public class RequestUtilsTest {
 
     @Test
@@ -123,5 +128,14 @@ public class RequestUtilsTest {
     @Test()
     public void shouldReturnFalseWhenBlankHttpVerb() {
         assertThat(isValidHttpVerb("")).isFalse();
+    }
+
+    @Test()
+    public void shouldApplyTimeoutToSessionRequest() {
+        final var request = createFakeServletRequest();
+        final var timeout = 42;
+        setTimeoutOnRequestSession(timeout, request);
+        verify(request.getSession(),
+               times(1)).setMaxInactiveInterval(timeout);
     }
 }
