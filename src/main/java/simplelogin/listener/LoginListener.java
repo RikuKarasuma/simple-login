@@ -17,6 +17,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static simplelogin.RequestUtils.makeReferrer;
+import static simplelogin.RequestUtils.setTimeoutOnRequestSession;
 
 @Component
 public class LoginListener implements ApplicationListener<AbstractAuthenticationEvent> {
@@ -34,6 +35,10 @@ public class LoginListener implements ApplicationListener<AbstractAuthentication
             return;
 
         final Authentication authentication = authenticationEvent.getAuthentication();
+        logUserLogin(authentication);
+    }
+
+    private void logUserLogin(final Authentication authentication) {
 
         var user = Optional.<User>empty();
         if (authentication.getPrincipal() instanceof User) {
@@ -41,8 +46,7 @@ public class LoginListener implements ApplicationListener<AbstractAuthentication
             final String auditMessage = "Login attempt with username: " + authentication.getName() +
                                         " Success: " + authentication.isAuthenticated() +
                                         " Request: " + makeReferrer(request) +
-                                        " IP: " + request.getRemoteHost() +
-                                        " Event: " + authenticationEvent.getClass().getSimpleName();
+                                        " IP: " + request.getRemoteHost();
 
             loginService.addUserLogin(user.map(User::getId)
                                           .orElse(-1L),
@@ -50,8 +54,15 @@ public class LoginListener implements ApplicationListener<AbstractAuthentication
                                       request.getRemoteHost(),
                                       authentication.isAuthenticated());
 
+            // TODO unit test.
+            setLoginSessionTimeout(request);
             System.out.println(auditMessage);
         }
+    }
+
+    private static void setLoginSessionTimeout(final HttpServletRequest request) {
+        final var loginSessionTimeout = 20;
+        setTimeoutOnRequestSession(loginSessionTimeout, request);
     }
 
 }

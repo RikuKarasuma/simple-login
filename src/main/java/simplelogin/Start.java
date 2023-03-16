@@ -1,6 +1,22 @@
 /**********************************
 *              @2023              *
 **********************************/
+
+// GENERAL TODO's
+// Email verification.
+// Rename project.
+// Proper context configuration piece by piece (Instead of using auto configure everywhere).
+// Local Database configuration. (Done)
+// Dev environment.
+// Dev Database configuration.
+// Set session timeout. (Done)
+
+// (Rename Project) TODO
+// Rename 'Index.html' to 'home.html'.
+// Rename 'CreateUser.html' to 'signup.html'
+// Rename 'Login.html' to 'signin.html'
+// Rename 'Failure.html' to 'servererror.html'
+
 package simplelogin;
 
 import org.springframework.boot.CommandLineRunner;
