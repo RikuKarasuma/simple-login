@@ -1,10 +1,11 @@
-CREATE TABLE Users (
+
+CREATE TABLE IF NOT EXISTS Users (
     id int auto_increment,
     username varchar(255),
     password varchar(255)
 );
 
-CREATE TABLE Login (
+CREATE TABLE IF NOT EXISTS Login (
     id int auto_increment,
     userId int,
     loginDate datetime,
@@ -13,7 +14,7 @@ CREATE TABLE Login (
     ip varchar(15)
 );
 
-CREATE TABLE Logout (
+CREATE TABLE IF NOT EXISTS Logout (
     id int auto_increment,
     userId int,
     logoutDate datetime,
@@ -21,7 +22,7 @@ CREATE TABLE Logout (
     ip varchar(15)
 );
 
-CREATE TABLE Request (
+CREATE TABLE IF NOT EXISTS Request (
     id int auto_increment,
     userId int,
     requestDate datetime,

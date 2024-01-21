@@ -53,4 +53,10 @@ public final class RequestUtils {
                 httpVerbUppercase.contains("TRACE") ||
                 httpVerbUppercase.contains("PATCH"));
     }
+
+    public static void setTimeoutOnRequestSession(final int timeout,
+                                                  final HttpServletRequest request) {
+        Optional.ofNullable(request.getSession())
+                .ifPresent(session -> session.setMaxInactiveInterval(timeout));
+    }
 }

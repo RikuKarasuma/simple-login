@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import simplelogin.listener.LogoutListener;
 import simplelogin.listener.RequestListener;
@@ -51,6 +52,10 @@ public final class RequestListenerTest {
     private FilterChain filterChain;
 
     @Test
+    @Sql(scripts = {
+        "classpath:sql/tables.sql",
+        "classpath:sql/clean.sql",
+    })
     public void shouldAddNewUserLogoutMessageAndRedirect() throws IOException, ServletException {
         final Authentication authentication = createFakeAuthentication("admin");
         SecurityContextHolder.getContext().setAuthentication(authentication);

@@ -17,6 +17,7 @@ import java.util.Properties;
 @EntityScan("simplelogin.entity")
 public class EntityConfig {
 
+    // TODO set up different database configs for local/dev purposes.
     @Bean
     LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
                                                                 Environment env) {

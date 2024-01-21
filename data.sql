@@ -1,5 +1,5 @@
 CREATE TABLE Users (
-    id int auto_increment,
+    id int auto_increment primary key,
     username varchar(255),
     password varchar(255)
 );
@@ -9,7 +9,7 @@ values
 (1, 'admin', '$2a$10$8zyKlXtwMGo9xKTxtbZnH.AlWaq5HSmacpMPXvmjyYAgMg/BQhe8O');
 
 CREATE TABLE Login (
-    id int auto_increment,
+    id int auto_increment primary key,
     userId int,
     loginDate datetime,
     success bit,
@@ -18,7 +18,7 @@ CREATE TABLE Login (
 );
 
 CREATE TABLE Logout (
-    id int auto_increment,
+    id int auto_increment primary key,
     userId int,
     logoutDate datetime,
     uri varchar(255),
@@ -26,7 +26,7 @@ CREATE TABLE Logout (
 );
 
 CREATE TABLE Request (
-    id int auto_increment,
+    id int auto_increment primary key,
     userId int,
     requestDate datetime,
     uri varchar(255),

@@ -18,6 +18,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.*;
 
+import static org.mockito.Mockito.mock;
+
 public final class TestUtils {
 
     public static HttpServletRequest createFakeServletRequest() {
@@ -47,6 +49,9 @@ public final class TestUtils {
                                                               final String queryString,
                                                               final String remoteHost) {
         return new HttpServletRequest() {
+
+            private HttpSession sessionMock = mock(HttpSession.class);
+
             @Override
             public String getAuthType() {
                 return null;
@@ -146,12 +151,12 @@ public final class TestUtils {
 
             @Override
             public HttpSession getSession(boolean b) {
-                return null;
+                return sessionMock;
             }
 
             @Override
             public HttpSession getSession() {
-                return null;
+                return sessionMock;
             }
 
             @Override
